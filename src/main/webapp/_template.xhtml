@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+<h:head>
+	<link type="text/css" rel="stylesheet"
+		href="resources/css/estilos-template.css" media="screen" />
+</h:head>
+<h:body>
+
+	<div id="cabecalho">
+		<div class="cabecalho">
+			<h:graphicImage library="img" name="logo.png" />
+
+			<div>
+				<h:form rendered="#{usuarioLogado != null}">
+
+					<p:menuButton value="Menu">
+						<p:menuitem value="Livros" action="livro?faces-redirect=true"
+							icon="fa fa-fw fa-book" />
+						<p:menuitem value="Autores" action="autor?faces-redirect=true"
+							icon="fa fa-fw fa-user" />
+						<p:menuitem value="Ring" action="ring?faces-redirect=true"
+							icon="fa fa-fw fa-sliders" />
+						<p:menuitem value="Carousel" action="carousel?faces-redirect=true"
+							icon="fa fa-fw fa-list-alt" />
+						<p:menuitem value="Vendas" action="vendas?faces-redirect=true"
+							icon="fa fa-fw fa-bar-chart" />
+						<p:separator />
+						<p:menuitem value="Logout" action="#{loginBean.deslogar}"
+							icon="fa fa-fw fa-sign-out" />
+					</p:menuButton>
+				</h:form>
+			</div>
+
+			<div>
+				<h:form rendered="#{usuarioLogado != null}">
+					<p:themeSwitcher id="basic" style="width:165px"
+						value="#{temaBean.tema}">
+						<f:selectItem itemLabel="Escolha o tema" itemValue="" />
+						<f:selectItems value="#{temaBean.temas}" var="tema"
+							itemLabel="#{tema}" itemValue="#{tema}" />
+						<f:ajax />
+					</p:themeSwitcher>
+				</h:form>
+
+			</div>
+
+			<div
+				style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+				<h:form rendered="#{usuarioLogado != null}">
+					<p:outputPanel>
+					Usuário logado
+				</p:outputPanel>
+					<p:outputPanel>
+					#{usuarioLogado.email}
+				</p:outputPanel>
+				</h:form>
+			</div>
+
+		</div>
+
+		<p:growl id="messages" showDetail="true" autoUpdate="true" />
+
+		<h2>
+			<ui:insert name="titulo"></ui:insert>
+
+		</h2>
+	</div>
+	<div id="conteudo">
+		<ui:insert name="conteudo"></ui:insert>
+	</div>
+	<div id="footer" class="footer">
+
+		<p:outputPanel>® Copyright 2022</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:insert name="footer"></ui:insert>
+		</p:outputPanel>
+
+	</div>
+
+</h:body>
+
+</html>
